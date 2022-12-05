@@ -6,7 +6,7 @@ import lombok.Data;
 import java.util.ArrayList;
 
 @Data
-public abstract class User {
+public abstract class AUser {
     private String name;
     private String email;
     private String phoneNumber;
