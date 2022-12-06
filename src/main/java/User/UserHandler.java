@@ -20,11 +20,11 @@ public class UserHandler {
         return instance;
     }
 
-    public boolean create(String name, String email, String phoneNumber, String homeAddress, String password, boolean admin) {
+    public User.AUser create(String name, String email, String phoneNumber, String homeAddress, String password, boolean admin) {
         if (users.containsKey(email)) {
-            return false;
+            return null;
         }
-        AUser AUser = new AdminUser(name, email, phoneNumber, homeAddress, password);
+        AUser AUser = new BasicUser(name, email, phoneNumber, homeAddress, password);
         if (admin) {
             AdminUser adminUser = (AdminUser) AUser;
             users.putIfAbsent(email, adminUser);
@@ -32,7 +32,8 @@ public class UserHandler {
             BasicUser basicUser = (BasicUser) AUser;
             users.putIfAbsent(email, basicUser);
         }
-        return true;
+        this.AUser = AUser;
+        return AUser;
     }
 
     public boolean login(String email, String password) {
